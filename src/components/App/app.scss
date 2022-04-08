@@ -1,0 +1,14 @@
+@use 'src/styles/vars';
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap');
+
+.app {
+  background: vars.$mainColor;
+  font-family: 'Manrope', sans-serif;
+  width: 550px;
+  text-align: center;
+  border-radius: 20px;
+  padding: 3rem 3rem 1rem;}
+
+.app img {
+  max-width: 150px;
+}

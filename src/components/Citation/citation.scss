@@ -1,0 +1,8 @@
+@use 'src/styles/vars';
+
+.citation{
+  color: vars.$textColor;
+  font-size: 1.75rem;
+  margin: 2rem 0 3rem;
+  line-height: 1.5em;
+}
