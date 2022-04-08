@@ -8,6 +8,7 @@ import Advice from 'src/components/Advice';
 import Citation from 'src/components/Citation';
 import Divider from 'src/components/Divider';
 import Dice from 'src/components/Dice';
+import ErrorMessage from 'src/components/ErrorMessage';
 
 // == Composant
 function App() {
@@ -16,6 +17,7 @@ function App() {
     advice: 'Click the dice to start',
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const loadCitations = () => {
     setIsLoading(true);
@@ -24,7 +26,9 @@ function App() {
         const response = res.data;
         setIsCitation(response.slip);
       })
-      .catch((error) => console.log(error))
+      .catch((error) => (
+        setError('Erreur de récupération des données')
+      ))
       .finally(() => {
         setIsLoading(false);
       });
@@ -35,12 +39,15 @@ function App() {
   };
   return (
     <div className="app">
-      <Advice />
+      <Advice number={isCitation.id} />
       <Citation
         id={isCitation.id}
         advice={isCitation.advice}
       />
       <Divider />
+      {
+        error && <ErrorMessage errorMessage={error} />
+      }
       <Dice
         isLoading={isLoading}
         onDiceClick={handleDiceClick}
