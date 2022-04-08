@@ -20,13 +20,12 @@ function App() {
   const [error, setError] = useState(null);
 
   const loadCitations = () => {
-    setIsLoading(true);
     axios.get('https://api.adviceslip.com/advice')
       .then((res) => {
         const response = res.data;
         setIsCitation(response.slip);
       })
-      .catch((error) => (
+      .catch((err) => (
         setError('Erreur de récupération des données')
       ))
       .finally(() => {
@@ -35,10 +34,15 @@ function App() {
   };
 
   const handleDiceClick = () => {
+    setIsLoading(true);
     loadCitations();
   };
   return (
     <div className="app">
+      <p className="note">
+        Note: Advice is cached for 2 seconds.
+        Any repeat-request within 2 seconds will return the same piece of advice
+      </p>
       <Advice number={isCitation.id} />
       <Citation
         id={isCitation.id}
